@@ -68,12 +68,12 @@
                     </tr>
                 </table>
 
-                {{-- <h2>Saran Konsumsi Kalori</h2> --}}
-                {{-- <ul>
+                <h2>Saran Konsumsi Kalori</h2>
+                <ul>
                     @foreach ($recommendedCalories as $food)
                         <li>{{ $food->nama_makanan }} - {{ $food->kalori_per_gram }} kalori per gram</li>
                     @endforeach
-                </ul> --}}
+                </ul>
             </div>
         </div>
 

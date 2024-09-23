@@ -122,7 +122,7 @@ class DailyEntryController extends Controller
         $bmrCorrected = $bmrBase * $activityFactor;
 
         // Rekomendasi kalori dari tabel KaloriMakanan
-        // $recommendedCalories = KaloriMakanan::where('kalori_per_gram', '<=', $bmrCorrected)->get();
+        $recommendedCalories = KaloriMakanan::where('kalori_per_gram', '<=', $bmrCorrected)->get();
 
         return [
             'bb' => $request->input('weight'),
