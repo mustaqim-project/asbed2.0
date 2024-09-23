@@ -6,7 +6,7 @@ use Detection\MobileDetect;
 
 
 Route::get('/', function () {
-    $detect = new MobileDetect;
+    $detect = new Mobile_Detect;
 
     if ($detect->isMobile()) {
         return view('mobile.frontend.dashboard.index');
@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', function () {
-    $detect = new MobileDetect;
+    $detect = new Mobile_Detect;
 
     if ($detect->isMobile() || $detect->isTablet()) {
         return view('mobile.frontend.dashboard.index');
