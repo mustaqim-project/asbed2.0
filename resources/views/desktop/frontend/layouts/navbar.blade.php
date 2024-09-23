@@ -18,28 +18,52 @@
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                         <div class="nav-btn px-3">
                             @if (Route::has('login'))
-                                <nav class="-mx-3 flex flex-1 justify-end">
-                                    @auth
-                                        <a href="{{ url('/dashboard') }}"
-                                            class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0">
-                                            Dashboard
-                                        </a>
-                                    @else
-                                        <a href="#"
-                                            class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0"
-                                            data-bs-toggle="modal" data-bs-target="#loginModal">
-                                            Log in
-                                        </a>
+                            <nav class="-mx-3 flex flex-1 justify-end">
+                                @auth
+                                <!-- Settings Dropdown -->
+                                <div class="hidden sm:flex sm:items-center sm:ms-6">
+                                    <x-dropdown align="right" width="48">
+                                        <x-slot name="trigger">
+                                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                                <div>{{ Auth::user()->name }}</div>
 
-                                        @if (Route::has('register'))
-                                            <a href="#"
-                                                class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0"
-                                                data-bs-toggle="modal" data-bs-target="#registerModal">
-                                                Register
-                                            </a>
-                                        @endif
-                                    @endauth
-                                </nav>
+                                                <div class="ms-1">
+                                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </x-slot>
+
+                                        <x-slot name="content">
+                                            <x-dropdown-link :href="route('profile.edit')">
+                                                {{ __('Profile') }}
+                                            </x-dropdown-link>
+
+                                            <!-- Authentication -->
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+
+                                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                                    {{ __('Log Out') }}
+                                                </x-dropdown-link>
+                                            </form>
+                                        </x-slot>
+                                    </x-dropdown>
+                                </div>
+                                @else
+                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    Log in
+                                </a>
+
+                                @if (Route::has('register'))
+                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#registerModal">
+                                    Register
+                                </a>
+                                @endif
+                                @endauth
+                            </nav>
                             @endif
                         </div>
                     </div>
@@ -59,8 +83,8 @@
     <!-- Navbar & Hero End -->
 
     @php
-        use App\Models\Aktifitas;
-        $aktifitas = aktifitas::all()->pluck('nama', 'id');
+    use App\Models\Aktifitas;
+    $aktifitas = aktifitas::all()->pluck('nama', 'id');
     @endphp
 
 
@@ -113,7 +137,7 @@
             border-radius: 5px;
             font-weight: bold;
             width: 100%;
-            color:#fff;
+            color: #fff;
         }
 
         .modal-footer {
@@ -160,6 +184,7 @@
             font-size: 1.5rem;
             color: #333;
         }
+
     </style>
 
     <!-- Login Modal Start -->
@@ -175,13 +200,11 @@
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Enter your email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Enter your password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="remember" name="remember">
@@ -214,8 +237,7 @@
                         <!-- Name -->
                         <div class="mb-4">
                             <label for="name" class="form-label">Name</label>
-                            <input id="name" class="form-control" type="text" name="name"
-                                value="{{ old('name') }}" required autofocus placeholder="Name">
+                            <input id="name" class="form-control" type="text" name="name" value="{{ old('name') }}" required autofocus placeholder="Name">
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
@@ -224,83 +246,77 @@
                             <label for="username" class="form-label">Username</label>
                             <input id="username" class="form-control" type="text" name="username"
                                 value="{{ old('username') }}" required placeholder="Username">
-                            <x-input-error :messages="$errors->get('username')" class="mt-2" />
-                        </div> --}}
+                        <x-input-error :messages="$errors->get('username')" class="mt-2" />
+                </div> --}}
 
-                        <!-- Email Address -->
-                        <div class="mb-4">
-                            <label for="email" class="form-label">Email</label>
-                            <input id="email" class="form-control" type="email" name="email"
-                                value="{{ old('email') }}" required placeholder="Email">
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        </div>
-
-                        <!-- Tanggal Lahir -->
-                        <div class="mb-4">
-                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                            <input id="tanggal_lahir" class="form-control" type="date" name="tanggal_lahir"
-                                value="{{ old('tanggal_lahir') }}" required>
-                            <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
-                        </div>
-
-                        <!-- Tinggi Badan -->
-                        <div class="mb-4">
-                            <label for="tinggi_badan" class="form-label">Tinggi Badan (cm)</label>
-                            <input id="tinggi_badan" class="form-control" type="number" name="tinggi_badan"
-                                value="{{ old('tinggi_badan') }}" required placeholder="Tinggi Badan">
-                            <x-input-error :messages="$errors->get('tinggi_badan')" class="mt-2" />
-                        </div>
-
-                        <!-- Berat Badan -->
-                        <div class="mb-4">
-                            <label for="berat_badan" class="form-label">Berat Badan (kg)</label>
-                            <input id="berat_badan" class="form-control" type="number" name="berat_badan"
-                                value="{{ old('berat_badan') }}" required placeholder="Berat Badan">
-                            <x-input-error :messages="$errors->get('berat_badan')" class="mt-2" />
-                        </div>
-
-                        <!-- Jenis Kelamin -->
-                        <div class="mb-4">
-                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control">
-                                <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki
-                                </option>
-                                <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan
-                                </option>
-                            </select>
-                            <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
-                        </div>
-
-                        <!-- Aktifitas -->
-                        <div class="mb-4">
-                            <label for="aktifitas_id" class="form-label">Pilih Aktifitas</label>
-                            <select id="aktifitas_id" name="aktifitas_id" class="form-control">
-                                <option value="">Pilih Aktifitas</option>
-                                @foreach ($aktifitas as $id => $nama)
-                                    <option value="{{ $id }}"
-                                        {{ old('aktifitas_id') == $id ? 'selected' : '' }}>{{ $nama }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('aktifitas_id')" class="mt-2" />
-                        </div>
-
-                        <!-- Profile Picture Upload -->
-                        <div class="mb-4">
-                            <img id="image_preview" src="#" alt="Image Preview" style="display:none;" />
-                            <label class="upload-file">
-                                <input type="file" id="profile_picture" name="profile_picture"
-                                    class="form-control" accept="image/*">
-                                Upload Image
-                            </label>
-                            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
-                        </div>
-
-                        <button type="submit" class="btn btn-primary2 w-100">Register</button>
-                    </form>
+                <!-- Email Address -->
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}" required placeholder="Email">
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
+
+                <!-- Tanggal Lahir -->
+                <div class="mb-4">
+                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                    <input id="tanggal_lahir" class="form-control" type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
+                    <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
+                </div>
+
+                <!-- Tinggi Badan -->
+                <div class="mb-4">
+                    <label for="tinggi_badan" class="form-label">Tinggi Badan (cm)</label>
+                    <input id="tinggi_badan" class="form-control" type="number" name="tinggi_badan" value="{{ old('tinggi_badan') }}" required placeholder="Tinggi Badan">
+                    <x-input-error :messages="$errors->get('tinggi_badan')" class="mt-2" />
+                </div>
+
+                <!-- Berat Badan -->
+                <div class="mb-4">
+                    <label for="berat_badan" class="form-label">Berat Badan (kg)</label>
+                    <input id="berat_badan" class="form-control" type="number" name="berat_badan" value="{{ old('berat_badan') }}" required placeholder="Berat Badan">
+                    <x-input-error :messages="$errors->get('berat_badan')" class="mt-2" />
+                </div>
+
+                <!-- Jenis Kelamin -->
+                <div class="mb-4">
+                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                    <select id="jenis_kelamin" name="jenis_kelamin" class="form-control">
+                        <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki
+                        </option>
+                        <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan
+                        </option>
+                    </select>
+                    <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
+                </div>
+
+                <!-- Aktifitas -->
+                <div class="mb-4">
+                    <label for="aktifitas_id" class="form-label">Pilih Aktifitas</label>
+                    <select id="aktifitas_id" name="aktifitas_id" class="form-control">
+                        <option value="">Pilih Aktifitas</option>
+                        @foreach ($aktifitas as $id => $nama)
+                        <option value="{{ $id }}" {{ old('aktifitas_id') == $id ? 'selected' : '' }}>{{ $nama }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('aktifitas_id')" class="mt-2" />
+                </div>
+
+                <!-- Profile Picture Upload -->
+                <div class="mb-4">
+                    <img id="image_preview" src="#" alt="Image Preview" style="display:none;" />
+                    <label class="upload-file">
+                        <input type="file" id="profile_picture" name="profile_picture" class="form-control" accept="image/*">
+                        Upload Image
+                    </label>
+                    <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
+                </div>
+
+                <button type="submit" class="btn btn-primary2 w-100">Register</button>
+                </form>
             </div>
         </div>
+    </div>
     </div>
     <!-- Register Modal End -->
 
@@ -315,4 +331,5 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         });
+
     </script>

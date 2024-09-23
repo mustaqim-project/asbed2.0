@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
     if ($detect->isMobile() || $detect->isTablet()) {
         return view('mobile.frontend.dashboard.index');
     } else {
-        return view('dashboard');
+        return view('desktop.frontend.home-components.home');
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
