@@ -70,15 +70,6 @@
 
     <!-- Modal CSS -->
     <style>
-        .dropdown-menu {
-
-            border-radius: 8px;
-            /* Add some rounding to match your button style */
-            padding: 10px;
-            /* Optionally increase the padding inside the dropdown */
-
-            /* For a slight shadow effect */
-        }
 
         /* General Modal Styling */
         .modal-content {
