@@ -1,4 +1,36 @@
     <!-- Navbar & Hero Start -->
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            min-width: 160px;
+        }
+
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+
+        .show {
+            display: block;
+        }
+
+    </style>
     <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -21,27 +53,24 @@
                             <nav class="-mx-3 flex flex-1 justify-end">
                                 @auth
                                 <div class="dropdown">
-                                    <button class="dropdown-toggle" type="button" id="profileDropdown" aria-expanded="false" onclick="toggleDropdown()">
+                                    <button class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" type="button" id="profileDropdown" aria-expanded="false" onclick="toggleDropdown()">
                                         {{ Auth::user()->name }}
                                     </button>
                                     <div class="dropdown-menu" id="dropdownMenu" aria-labelledby="profileDropdown">
                                         <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
-                                        <a href="{{ route('logout') }}" class="dropdown-item"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
                                     </div>
                                 </div>
                                 @else
-                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="modal"
-                                    data-bs-target="#loginModal">
+                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#loginModal">
                                     Log in
                                 </a>
 
                                 @if (Route::has('register'))
-                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="modal"
-                                    data-bs-target="#registerModal">
+                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#registerModal">
                                     Register
                                 </a>
                                 @endif
@@ -66,8 +95,8 @@
     <!-- Navbar & Hero End -->
 
     @php
-        use App\Models\Aktifitas;
-        $aktifitas = aktifitas::all()->pluck('nama', 'id');
+    use App\Models\Aktifitas;
+    $aktifitas = aktifitas::all()->pluck('nama', 'id');
     @endphp
 
 
@@ -120,7 +149,7 @@
             border-radius: 5px;
             font-weight: bold;
             width: 100%;
-            color:#fff;
+            color: #fff;
         }
 
         .modal-footer {
@@ -167,6 +196,7 @@
             font-size: 1.5rem;
             color: #333;
         }
+
     </style>
 
     <!-- Login Modal Start -->
@@ -182,13 +212,11 @@
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Enter your email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Enter your password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="remember" name="remember">
@@ -221,8 +249,7 @@
                         <!-- Name -->
                         <div class="mb-4">
                             <label for="name" class="form-label">Name</label>
-                            <input id="name" class="form-control" type="text" name="name"
-                                value="{{ old('name') }}" required autofocus placeholder="Name">
+                            <input id="name" class="form-control" type="text" name="name" value="{{ old('name') }}" required autofocus placeholder="Name">
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
@@ -231,83 +258,77 @@
                             <label for="username" class="form-label">Username</label>
                             <input id="username" class="form-control" type="text" name="username"
                                 value="{{ old('username') }}" required placeholder="Username">
-                            <x-input-error :messages="$errors->get('username')" class="mt-2" />
-                        </div> --}}
+                        <x-input-error :messages="$errors->get('username')" class="mt-2" />
+                </div> --}}
 
-                        <!-- Email Address -->
-                        <div class="mb-4">
-                            <label for="email" class="form-label">Email</label>
-                            <input id="email" class="form-control" type="email" name="email"
-                                value="{{ old('email') }}" required placeholder="Email">
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        </div>
-
-                        <!-- Tanggal Lahir -->
-                        <div class="mb-4">
-                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                            <input id="tanggal_lahir" class="form-control" type="date" name="tanggal_lahir"
-                                value="{{ old('tanggal_lahir') }}" required>
-                            <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
-                        </div>
-
-                        <!-- Tinggi Badan -->
-                        <div class="mb-4">
-                            <label for="tinggi_badan" class="form-label">Tinggi Badan (cm)</label>
-                            <input id="tinggi_badan" class="form-control" type="number" name="tinggi_badan"
-                                value="{{ old('tinggi_badan') }}" required placeholder="Tinggi Badan">
-                            <x-input-error :messages="$errors->get('tinggi_badan')" class="mt-2" />
-                        </div>
-
-                        <!-- Berat Badan -->
-                        <div class="mb-4">
-                            <label for="berat_badan" class="form-label">Berat Badan (kg)</label>
-                            <input id="berat_badan" class="form-control" type="number" name="berat_badan"
-                                value="{{ old('berat_badan') }}" required placeholder="Berat Badan">
-                            <x-input-error :messages="$errors->get('berat_badan')" class="mt-2" />
-                        </div>
-
-                        <!-- Jenis Kelamin -->
-                        <div class="mb-4">
-                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control">
-                                <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki
-                                </option>
-                                <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan
-                                </option>
-                            </select>
-                            <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
-                        </div>
-
-                        <!-- Aktifitas -->
-                        <div class="mb-4">
-                            <label for="aktifitas_id" class="form-label">Pilih Aktifitas</label>
-                            <select id="aktifitas_id" name="aktifitas_id" class="form-control">
-                                <option value="">Pilih Aktifitas</option>
-                                @foreach ($aktifitas as $id => $nama)
-                                    <option value="{{ $id }}"
-                                        {{ old('aktifitas_id') == $id ? 'selected' : '' }}>{{ $nama }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('aktifitas_id')" class="mt-2" />
-                        </div>
-
-                        <!-- Profile Picture Upload -->
-                        <div class="mb-4">
-                            <img id="image_preview" src="#" alt="Image Preview" style="display:none;" />
-                            <label class="upload-file">
-                                <input type="file" id="profile_picture" name="profile_picture"
-                                    class="form-control" accept="image/*">
-                                Upload Image
-                            </label>
-                            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
-                        </div>
-
-                        <button type="submit" class="btn btn-primary2 w-100">Register</button>
-                    </form>
+                <!-- Email Address -->
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}" required placeholder="Email">
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
+
+                <!-- Tanggal Lahir -->
+                <div class="mb-4">
+                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                    <input id="tanggal_lahir" class="form-control" type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
+                    <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
+                </div>
+
+                <!-- Tinggi Badan -->
+                <div class="mb-4">
+                    <label for="tinggi_badan" class="form-label">Tinggi Badan (cm)</label>
+                    <input id="tinggi_badan" class="form-control" type="number" name="tinggi_badan" value="{{ old('tinggi_badan') }}" required placeholder="Tinggi Badan">
+                    <x-input-error :messages="$errors->get('tinggi_badan')" class="mt-2" />
+                </div>
+
+                <!-- Berat Badan -->
+                <div class="mb-4">
+                    <label for="berat_badan" class="form-label">Berat Badan (kg)</label>
+                    <input id="berat_badan" class="form-control" type="number" name="berat_badan" value="{{ old('berat_badan') }}" required placeholder="Berat Badan">
+                    <x-input-error :messages="$errors->get('berat_badan')" class="mt-2" />
+                </div>
+
+                <!-- Jenis Kelamin -->
+                <div class="mb-4">
+                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                    <select id="jenis_kelamin" name="jenis_kelamin" class="form-control">
+                        <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki
+                        </option>
+                        <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan
+                        </option>
+                    </select>
+                    <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
+                </div>
+
+                <!-- Aktifitas -->
+                <div class="mb-4">
+                    <label for="aktifitas_id" class="form-label">Pilih Aktifitas</label>
+                    <select id="aktifitas_id" name="aktifitas_id" class="form-control">
+                        <option value="">Pilih Aktifitas</option>
+                        @foreach ($aktifitas as $id => $nama)
+                        <option value="{{ $id }}" {{ old('aktifitas_id') == $id ? 'selected' : '' }}>{{ $nama }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('aktifitas_id')" class="mt-2" />
+                </div>
+
+                <!-- Profile Picture Upload -->
+                <div class="mb-4">
+                    <img id="image_preview" src="#" alt="Image Preview" style="display:none;" />
+                    <label class="upload-file">
+                        <input type="file" id="profile_picture" name="profile_picture" class="form-control" accept="image/*">
+                        Upload Image
+                    </label>
+                    <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
+                </div>
+
+                <button type="submit" class="btn btn-primary2 w-100">Register</button>
+                </form>
             </div>
         </div>
+    </div>
     </div>
     <!-- Register Modal End -->
 
@@ -322,4 +343,23 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         });
+
+        function toggleDropdown() {
+            var dropdownMenu = document.getElementById("dropdownMenu");
+            dropdownMenu.classList.toggle("show");
+        }
+
+        // Menutup dropdown jika pengguna mengklik di luar elemen dropdown
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
     </script>
