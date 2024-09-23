@@ -24,7 +24,7 @@
                                     <a href="#" class="btn btn-primary rounded-pill flex-shrink-0" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="dropdown-toggle">{{ Auth::user()->name }}</span>
                                     </a>
-                                    <div class="dropdown-menu" style="margin-top: 0px">
+                                    <div class="dropdown-menu" style="margin-top: 0px;  box-shadow: 0px 4px 12px rgba(114, 104, 104, 0.1);">
                                         <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
@@ -76,7 +76,7 @@
             /* Add some rounding to match your button style */
             padding: 10px;
             /* Optionally increase the padding inside the dropdown */
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
             /* For a slight shadow effect */
         }
 
