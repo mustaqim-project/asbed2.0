@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Detection\MobileDetect;
 
+use App\Http\Controllers\DailyEntryController;
+use App\Http\Controllers\UserWeightController;
 
 
 Route::get('/', function () {
-    $detect = new Mobile_Detect();
+    $detect = new Mobile_Detect;
 
     if ($detect->isMobile()) {
         return view('mobile.frontend.dashboard.index');
@@ -15,7 +18,7 @@ Route::get('/', function () {
     } else {
         return view('desktop.frontend.home-components.home');
     }
-});
+})->middleware(\App\Http\Middleware\LanguageMiddleware::class);
 
 
 
@@ -29,6 +32,20 @@ Route::get('/dashboard', function () {
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/daily_entries/create', [DailyEntryController::class, 'create'])->name('daily_entries.create');
+//     Route::post('/daily_entries', [DailyEntryController::class, 'store'])->name('daily_entries.store');
+
+//     Route::get('/weights', [UserWeightController::class, 'index'])->name('weights.index');
+// });
 
 
 require __DIR__.'/auth.php';
