@@ -1,36 +1,4 @@
     <!-- Navbar & Hero Start -->
-    <style>
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: white;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            min-width: 160px;
-        }
-
-        .dropdown-menu a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: #ddd;
-        }
-
-        .show {
-            display: block;
-        }
-
-    </style>
     <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -52,18 +20,24 @@
                             @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
                                 @auth
-                                <div class="dropdown">
-                                    <button class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" type="button" id="profileDropdown" aria-expanded="false" onclick="toggleDropdown()">
-                                        {{ Auth::user()->name }}
-                                    </button>
-                                    <div class="dropdown-menu" id="dropdownMenu" aria-labelledby="profileDropdown">
+
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link" data-bs-toggle="dropdown">
+                                        <span class="dropdown-toggle">{{ Auth::user()->name }}</span>
+                                    </a>
+                                    <div class="dropdown-menu">
                                         <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
-                                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        <form method="POST" action="{{ route('logout') }}">
                                             @csrf
+                                            <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
+
+
                                         </form>
                                     </div>
                                 </div>
+
+
+
                                 @else
                                 <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#loginModal">
                                     Log in
@@ -343,23 +317,5 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         });
-
-        function toggleDropdown() {
-            var dropdownMenu = document.getElementById("dropdownMenu");
-            dropdownMenu.classList.toggle("show");
-        }
-
-        // Menutup dropdown jika pengguna mengklik di luar elemen dropdown
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropdown-toggle')) {
-                var dropdowns = document.getElementsByClassName("dropdown-menu");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
 
     </script>
