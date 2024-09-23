@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('username')->unique(); // Unik untuk username
             $table->date('tanggal_lahir');
             $table->float('tinggi_badan');
             $table->float('berat_badan');
