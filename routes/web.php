@@ -2,36 +2,25 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Detection\MobileDetect;
 
-use App\Http\Controllers\DailyEntryController;
-use App\Http\Controllers\UserWeightController;
-
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/', function () {
-    $detect = new Mobile_Detect;
-
-    if ($detect->isMobile()) {
-        return view('welcome');
-    } elseif ($detect->isTablet()) {
-        return view('welcome');
-    } else {
-        return view('desktop.frontend.home-components.home');
-    }
+    return view('welcome');
 });
 
-
-
 Route::get('/dashboard', function () {
-    $detect = new Mobile_Detect;
-
-    if ($detect->isMobile() || $detect->isTablet()) {
-        return view('welcome');
-    } else {
-        return view('dashboard');
-    }
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,15 +28,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/daily_entries/create', [DailyEntryController::class, 'create'])->name('daily_entries.create');
-//     Route::post('/daily_entries', [DailyEntryController::class, 'store'])->name('daily_entries.store');
-
-//     Route::get('/weights', [UserWeightController::class, 'index'])->name('weights.index');
-// });
-
-
 require __DIR__.'/auth.php';
-
-
