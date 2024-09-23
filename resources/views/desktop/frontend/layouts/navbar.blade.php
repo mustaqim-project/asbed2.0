@@ -59,7 +59,7 @@
     <!-- Navbar & Hero End -->
 
     @php
-        use App\Models\aktifitas\aktifitas;
+        use App\Models\Aktifitas;
         $aktifitas = aktifitas::all()->pluck('nama', 'id');
     @endphp
 
