@@ -12,9 +12,9 @@ Route::get('/', function () {
     $detect = new Mobile_Detect;
 
     if ($detect->isMobile()) {
-        return view('mobile.frontend.dashboard.index');
+        return view('welcome');
     } elseif ($detect->isTablet()) {
-        return view('mobile.frontend.dashboard.index');
+        return view('welcome');
     } else {
         return view('desktop.frontend.home-components.home');
     }
@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
     $detect = new Mobile_Detect;
 
     if ($detect->isMobile() || $detect->isTablet()) {
-        return view('mobile.frontend.dashboard.index');
+        return view('welcome');
     } else {
         return view('dashboard');
     }
