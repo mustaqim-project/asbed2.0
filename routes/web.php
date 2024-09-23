@@ -6,7 +6,7 @@ use Detection\MobileDetect;
 
 
 Route::get('/', function () {
-    $detect = new Mobile_Detect;
+    $detect = new MobileDetect();
 
     if ($detect->isMobile()) {
         return view('mobile.frontend.dashboard.index');
