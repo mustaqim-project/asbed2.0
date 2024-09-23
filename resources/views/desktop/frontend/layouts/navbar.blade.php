@@ -22,7 +22,7 @@
                                 @auth
 
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link" data-bs-toggle="dropdown">
+                                    <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="dropdown">
                                         <span class="dropdown-toggle">{{ Auth::user()->name }}</span>
                                     </a>
                                     <div class="dropdown-menu">
