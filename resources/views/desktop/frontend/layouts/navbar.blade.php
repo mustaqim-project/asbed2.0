@@ -28,7 +28,8 @@
                                         <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
+                                            <a href="route('logout')" onclick="event.preventDefault();
+                                                        this.closest('form').submit();" class="dropdown-item">Logout</a>
                                         </form>
                                     </div>
                                 </div>
@@ -70,7 +71,6 @@
 
     <!-- Modal CSS -->
     <style>
-
         /* General Modal Styling */
         .modal-content {
             border-radius: 10px;
