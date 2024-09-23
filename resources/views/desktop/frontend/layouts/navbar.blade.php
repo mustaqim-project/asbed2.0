@@ -24,7 +24,7 @@
                                     <a href="#" class="btn btn-primary rounded-pill flex-shrink-0" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="dropdown-toggle">{{ Auth::user()->name }}</span>
                                     </a>
-                                    <div class="dropdown-menu">
+                                    <div class="dropdown-menu" style="margin-top: 0px">
                                         <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
@@ -71,8 +71,7 @@
     <!-- Modal CSS -->
     <style>
         .dropdown-menu {
-            margin-top: -5px;
-            /* Move the dropdown closer to the parent */
+
             border-radius: 8px;
             /* Add some rounding to match your button style */
             padding: 10px;
