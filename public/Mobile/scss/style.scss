@@ -3,18 +3,18 @@
 @import "bootstrap/variables";
 
 //Importing Sticky Utility Classes
-@import "asbed/variables";
+@import "Sikadsis/variables";
 
 //Importing Sturctural Elements
-@import "asbed/typography";
-@import "asbed/structure";
-@import "asbed/logos";
-@import "asbed/header-bar";
-@import "asbed/footer-bar";
-@import "asbed/menu";
-@import "asbed/sidebar";
-@import "asbed/shapes";
-@import "asbed/utilities";
+@import "Sikadsis/typography";
+@import "Sikadsis/structure";
+@import "Sikadsis/logos";
+@import "Sikadsis/header-bar";
+@import "Sikadsis/footer-bar";
+@import "Sikadsis/menu";
+@import "Sikadsis/sidebar";
+@import "Sikadsis/shapes";
+@import "Sikadsis/utilities";
 
 //Importing Components
 @import "components/preloader";
@@ -55,7 +55,7 @@
 @import "pages/vcard";
 
 //Importing Dark Mode
-@import "asbed/_dark";
+@import "Sikadsis/_dark";
 
 //Demo Aligns for Icons and Background Demo Images
 //Can be deleted to save space

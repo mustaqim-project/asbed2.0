@@ -45,7 +45,8 @@ $(document).ready(function(){
             ["gray1","#F5F7FA","#E6E9ED","#c2c5c9"],
             ["gray2","#CCD1D9","#AAB2BD","#88919d"],
             ["dark1","#656D78","#434A54","#242b34"],
-            ["dark2","#3C3B3D","#323133","#1c191f"]
+            ["dark2","#3C3B3D","#323133","#1c191f"],
+            ["green3","#03836d","#097966","#247B6C"]
         ];
         var socialColorArray = [
             ["facebook","#3b5998"],
@@ -202,25 +203,25 @@ $(document).ready(function(){
                 setTimeout(function(){
                     if($('body').hasClass('detect-theme')){$('body').removeClass('detect-theme');}
                     if($('body').hasClass('theme-light')){
-                        eraseCookie('asbed_dark_mode');
+                        eraseCookie('sikadsis_dark_mode');
                         darkSwitch.prop('checked', false);
-                        createCookie('asbed_light_mode', true, 1);
+                        createCookie('sikadsis_light_mode', true, 1);
                     }
                     if($('body').hasClass('theme-dark')){
-                        eraseCookie('asbed_light_mode');
+                        eraseCookie('sikadsis_light_mode');
                         darkSwitch.prop('checked', true);
-                        createCookie('asbed_dark_mode', true, 1);
+                        createCookie('sikadsis_dark_mode', true, 1);
                     }
                 },150);
                 return false;
             })
-            if (readCookie('asbed_dark_mode')) {darkSwitch.prop('checked', true); $('body').removeClass('theme-light').addClass('theme-dark');}
-            if (readCookie('asbed_light_mode')) {darkSwitch.prop('checked', false); $('body').removeClass('theme-dark').addClass('theme-light');}
+            if (readCookie('sikadsis_dark_mode')) {darkSwitch.prop('checked', true); $('body').removeClass('theme-light').addClass('theme-dark');}
+            if (readCookie('sikadsis_light_mode')) {darkSwitch.prop('checked', false); $('body').removeClass('theme-dark').addClass('theme-light');}
 
 
             //Auto Dark Mode
-            function activateDarkMode(){$('body').removeClass('theme-light').addClass('theme-dark'); $('#dark-mode-detected').removeClass('disabled'); eraseCookie('asbed_light_mode'); createCookie('asbed_dark_mode', true, 1);}
-            function activateLightMode(){$('body').removeClass('theme-dark').addClass('theme-light'); $('#dark-mode-detected').removeClass('disabled'); eraseCookie('asbed_dark_mode'); createCookie('asbed_light_mode', true, 1);}
+            function activateDarkMode(){$('body').removeClass('theme-light').addClass('theme-dark'); $('#dark-mode-detected').removeClass('disabled'); eraseCookie('sikadsis_light_mode'); createCookie('sikadsis_dark_mode', true, 1);}
+            function activateLightMode(){$('body').removeClass('theme-dark').addClass('theme-light'); $('#dark-mode-detected').removeClass('disabled'); eraseCookie('sikadsis_dark_mode'); createCookie('sikadsis_light_mode', true, 1);}
             function activateNoPreference(){$('#manual-mode-detected').removeClass('disabled');}
 
             function setColorScheme() {
@@ -958,12 +959,12 @@ $(document).ready(function(){
             //Copy Link
             $('.shareToCopyLink').on('click',function(element){
                 $(this).parent().find('p').html('Link Copied');
-                $(this).removeClass('bg-blue2-dark').addClass('bg-green1-dark');
+                $(this).removeClass('bg-green3-dark').addClass('bg-green1-dark');
                 $(this).find('i').attr('class','');
                 $(this).find('i').attr('class','fa fa-check font-22');
                 setTimeout(function(){
                     $('.shareToCopyLink').parent().find('p').html('Copy Link');
-                    $('.shareToCopyLink').removeClass('bg-green1-dark').addClass('bg-blue2-dark');
+                    $('.shareToCopyLink').removeClass('bg-green1-dark').addClass('bg-green3-dark');
                     $('.shareToCopyLink').find('i').attr('class','');
                     $('.shareToCopyLink').find('i').attr('class','fa fa-link font-22');
                 },1000);
@@ -1390,7 +1391,7 @@ $(document).ready(function(){
 
         function highlight_colors(){
 
-            var bodyColor = readCookie('asbed-color-scheme');
+            var bodyColor = readCookie('Sikadsis-color-scheme');
             if(bodyColor == undefined){var bodyColor = $('body').data('highlight');}
 
             var data = colorsArray.map(colorsArray => colorsArray[0]);
@@ -1417,7 +1418,7 @@ $(document).ready(function(){
                 var highlightNew = $(this).data('change-highlight');
                 $('body').attr('data-highlight',highlightNew);
                 $('.generated-highlight').remove();
-                createCookie('asbed-color-scheme',highlightNew,1)
+                createCookie('Sikadsis-color-scheme',highlightNew,1)
                 var data = colorsArray.map(colorsArray => colorsArray[0]);
                     if (data.indexOf(highlightNew) > -1) {
                         var highlightLocated = data.indexOf(highlightNew)

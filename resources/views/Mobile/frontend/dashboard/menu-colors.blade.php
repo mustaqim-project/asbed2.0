@@ -9,9 +9,10 @@
 <div class="card card-style">
     <div class="highlight-changer pt-3 pb-2">
         <p class="text-center">
-            AS-BED is packed with a beautiful color scheme.<br>Tap on your favorite! The page will adapt!
+            Sikadsis is packed with a beautiful color scheme.<br>Tap on your favorite! The page will adapt!
         </p>
-        <a href="#" data-change-highlight="blue2"><i class="fa fa-circle color-blue2-dark"></i><span class="color-blue2-light">Default</span></a>
+        <a href="#" data-change-highlight="green3"><i class="fa fa-circle color-green3-dark"></i><span class="color-green3-light">Default</span></a>
+        <a href="#" data-change-highlight="blue2"><i class="fa fa-circle color-blue2-dark"></i><span class="color-blue2-light">Blue</span></a>
         <a href="#" data-change-highlight="red2"><i class="fa fa-circle color-red1-dark"></i><span class="color-red2-light">Red</span></a>
         <a href="#" data-change-highlight="orange"><i class="fa fa-circle color-orange-dark"></i><span class="color-orange-light">Orange</span></a>
         <a href="#" data-change-highlight="pink2"><i class="fa fa-circle color-pink2-dark"></i><span class="color-pink2-light">Pink</span></a>

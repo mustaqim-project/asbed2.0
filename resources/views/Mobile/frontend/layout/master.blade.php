@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="theme-light" data-highlight="blue2">
+<body class="theme-light" data-highlight="green3">
 
     <div id="preloader">
         <div class="spinner-border color-highlight" role="status"></div>
