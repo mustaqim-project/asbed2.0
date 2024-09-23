@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LanguageMiddleware;
 use App\Http\Controllers\DailyEntryController;
 use App\Http\Controllers\UserWeightController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     $detect = new MobileDetect();
@@ -33,10 +34,15 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/daily_entries/create', [DailyEntryController::class, 'create'])->name('daily_entries.create');
     Route::post('/daily_entries', [DailyEntryController::class, 'store'])->name('daily_entries.store');
-
     Route::get('/weights', [UserWeightController::class, 'index'])->name('weights.index');
 });
 
+
+
+Route::put('profile-password-update/{id}', [ProfileController::class, 'passwordUpdate'])->name('profile-password.update');
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
 
