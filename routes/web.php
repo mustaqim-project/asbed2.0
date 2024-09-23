@@ -1,12 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Mobile_Detect;
-
-
+use Detection\MobileDetect;
 
 Route::get('/', function () {
-    $detect = new Mobile_Detect();
+    $detect = new MobileDetect();
 
     if ($detect->isMobile()) {
         return view('mobile.frontend.dashboard.index');
@@ -17,10 +15,8 @@ Route::get('/', function () {
     }
 });
 
-
-
 Route::get('/dashboard', function () {
-    $detect = new Mobile_Detect();
+    $detect = new MobileDetect();
 
     if ($detect->isMobile() || $detect->isTablet()) {
         return view('mobile.frontend.dashboard.index');
@@ -29,8 +25,4 @@ Route::get('/dashboard', function () {
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
-
 require __DIR__.'/auth.php';
-
-
