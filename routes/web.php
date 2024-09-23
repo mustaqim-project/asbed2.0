@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', function () {
-    $detect = new Mobile_Detect;
+    $detect = new MobileDetect();
 
     if ($detect->isMobile() || $detect->isTablet()) {
         return view('mobile.frontend.dashboard.index');
