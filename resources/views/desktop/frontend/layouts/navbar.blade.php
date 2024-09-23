@@ -20,9 +20,8 @@
                             @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
                                 @auth
-
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="dropdown">
+                                    <a href="#" class="btn btn-primary rounded-pill flex-shrink-0" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="dropdown-toggle">{{ Auth::user()->name }}</span>
                                     </a>
                                     <div class="dropdown-menu">
@@ -30,14 +29,9 @@
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
-
-
                                         </form>
                                     </div>
                                 </div>
-
-
-
                                 @else
                                 <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-3 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#loginModal">
                                     Log in
