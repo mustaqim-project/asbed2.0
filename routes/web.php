@@ -15,7 +15,7 @@ Route::get('/', function () {
     } else {
         return view('desktop.frontend.home-components.home');
     }
-})->middleware(\App\Http\Middleware\LanguageMiddleware::class);
+});
 
 
 
